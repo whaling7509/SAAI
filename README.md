@@ -10,7 +10,7 @@ Requirements beforehand:
 - **pyttsx**
 - For Windows users:
   - **pywin** (32 or 64 bit)
-  - **VCforPython*
+  - **VCforPython**
 
 Linux users, don't fret! You have pyttsx preinstalled (probably).
 
