@@ -18,6 +18,8 @@ while True:
     userInput = raw_input(">>> ").lower()
     if userInput in ['hi', 'hello']:
         choice("Hello!", "Hi there!")
+    elif userInput in ['hi saai', 'hello saai']:
+        choice("Hello to you too.", "You know my name!")
     else:
         print("I don't understand.")
         engine.say("I don't understand.")
