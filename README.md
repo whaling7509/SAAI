@@ -1,5 +1,5 @@
 # SAAI
-Our Artificial intelligence program.
+## Our Artificial intelligence program.
 
 Install PYTTSX for text to speech capiblities.
 
@@ -9,4 +9,4 @@ How to install on windows.
 
 -Open CMD
 
--Run this command: **C:/Python27/scripts/pip install pyttsx** - Command for default python location.
+-Run this command into CMD: **pip install pyttsx** to install pyttsx.
