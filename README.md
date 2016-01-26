@@ -4,7 +4,7 @@
 Requirements beforehand:
 - **ChatterBot**
 - **python-levenshtein**
-- **VCforPython
+- **VCforPython**
 - **pip**
 - **pyttsx**
 - For Windows users:
