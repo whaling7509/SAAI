@@ -16,6 +16,7 @@ def choice(str, str2):
 
 while True:
     userInput = raw_input(">>> ").lower()
+    userInput = ''.join([c for c in userInput if c not in ('!', '?', '.', ',')])
     if userInput in ['hi', 'hello']:
         choice("Hello!", "Hi there!")
     elif userInput in ['hi saai', 'hello saai']:
