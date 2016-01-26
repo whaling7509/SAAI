@@ -2,6 +2,9 @@
 ## Our Artificial intelligence program.
 
 Requirements beforehand:
+- **ChatterBot**
+- **python-levenshtein**
+- **VCforPython**
 - **pip**
 - **pyttsx**
 - For Windows users:
