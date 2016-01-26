@@ -1,6 +1,6 @@
 # SAAI
 ## Our ChatterBot based Artificial intelligence program.
-### Robotics project.
+### Thanks to ChatterBot we can create this self-learning AI
 
 Requirements beforehand:
 - **ChatterBot**
