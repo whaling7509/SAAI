@@ -101,3 +101,4 @@ while True:
         bot.train("chatterbot.corpus.english.conversations")
         engine.say(botoutput)
         engine.runAndWait()
+    print ""
