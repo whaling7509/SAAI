@@ -1,5 +1,5 @@
 # SAAI
-## Our Artificial intelligence program.
+## Our ChatterBot based Artificial intelligence program.
 ### Based on ChatterBot
 
 Requirements beforehand:
@@ -14,3 +14,6 @@ Requirements beforehand:
 Linux users, don't fret! You have pyttsx preinstalled (probably).
 
 And no one cares about Mac OSX.
+
+To do list:
+    OCR support?
