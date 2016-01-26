@@ -12,7 +12,9 @@ bot = ChatBot("No Output",
     storage_adapter="chatterbot.adapters.storage.JsonDatabaseAdapter",
     logic_adapter="chatterbot.adapters.logic.ClosestMatchAdapter",
     io_adapter="chatterbot.adapters.io.NoOutputAdapter",
-    database="../database.db")
+    database="./database.db")
+
+bot = ChatBot("SAAI")
 
 #age since launch
 now = datetime.datetime.now()
@@ -61,6 +63,7 @@ while True:
 
     userInput = raw_input(">>> ").lower()
     userInput = ''.join([c for c in userInput if c not in ('!', '?', '.', ',')])
+    print ""
 
     if "buggy" in userInput or "bug" in userInput:
         print "Please visit my GITHUB page to report bugs or request features."
@@ -68,8 +71,16 @@ while True:
         engine.say("Please visit my GITHUB page to report bugs or request features..."
                    " ... You will find my page at: github.com/Cyber-Shadow/SAAI")
         engine.runAndWait()
-    elif userInput in ['hi', 'hello', 'whats up']:
-        choice2("Hello!", "Hi there!")
+    elif "weather" in userInput:
+        print "I have no idea, my Creator was to lazy to program a weather function. " \
+              "I do have a tip for you though, look or even go outside," \
+              " this way you can feel heat and cold and see the rain" \
+              "... When you're finished with that tell me about it."
+        engine.say("I have no idea, my Creator was to lazy to program a weather function ..."
+                   " but I do have a tip for you though ..."
+                   "look or even go outside, this way you can feel heat and cold and see the rain ..."
+                   " When you're finished with that tell me about it.")
+        engine.runAndWait()
     elif userInput in ['hi saai', 'hello saai']:
         choice2("Hello to you too.", "You know my name!")
     elif userInput in ['tell me a joke', "tell me something funny"]:
@@ -87,7 +98,6 @@ while True:
         engine.runAndWait()
     else:
         botoutput = bot.get_response(userInput)
-        print botoutput
         bot.train("chatterbot.corpus.english.conversations")
         engine.say(botoutput)
         engine.runAndWait()
