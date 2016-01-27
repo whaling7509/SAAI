@@ -13,8 +13,7 @@ Looking for help:
 
 Requirements beforehand:
 - **ChatterBot**
-- **python-levenshtein**
-*
+- **python-Levenshtein**
 - **pip**
 - **pyttsx**
 - For Windows users:
