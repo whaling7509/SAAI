@@ -16,6 +16,7 @@ Requirements beforehand:
 - **python-Levenshtein**
 - **pip**
 - **pyttsx**
+- **SpeechRecognition**
 - For Windows users:
   - **pywin** (32 or 64 bit)
   - **VCforPython**
