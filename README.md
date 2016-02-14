@@ -25,6 +25,7 @@ Requirements beforehand:
 
 
 To do list:
+
     -Active Voice Recognition.
     -OCR support?
 
