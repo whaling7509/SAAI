@@ -20,13 +20,12 @@ Requirements beforehand:
 - For Windows users:
   - **pywin** (32 or 64 bit)
   - **VCforPython**
+- For linuux users:
+  - **espeak**
 
-Linux users, don't fret! You have pyttsx preinstalled (probably).
-
-And no one cares about Mac OSX.
 
 To do list:
-
+    Active Voice Recognition.
     OCR support?
 
 
