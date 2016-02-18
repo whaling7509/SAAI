@@ -20,7 +20,7 @@ Requirements beforehand:
 - For Windows users:
   - **pywin** (32 or 64 bit)
   - **VCforPython**
-- For linuux users:
+- For linux users:
   - **espeak**
 
 
