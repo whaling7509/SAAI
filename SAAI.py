@@ -10,6 +10,7 @@ import string
 engine = pyttsx.init()
 client = yweather.Client()
 stuff = ""
+botlearn = 1
 
 bot = ChatBot("No Output",
     storage_adapter="chatterbot.adapters.storage.JsonDatabaseAdapter",
@@ -73,14 +74,14 @@ while True:
         data = ["NO", "What do you call a blonde who has dyed her hair brown? ... Artificial intelligence!",
                 "I had to sell my first vacuum cleaner ... It sucked.",
                 "Why did the platypus cross the road? ... Because it was in the wrong joke.",
-                "How does the d cut his hair? ... Eclipse it."]
+                "How does the moon cut his hair? ... Eclipse it."]
         x = choice(data)
         talk(x.call())
     elif userInput in ['what is your age', 'how old are you']:
         talk("I am " + str(age) + "old, since you launched me")
         engine.runAndWait()
     elif checkthing(userInput):
-        print("The answer is " + str((eval((userInput.translate(None, string.ascii_letters).translate(None, " "))))) + ".")
+        print("The answer is" + str((eval((userInput.translate(None, string.ascii_letters).translate(None, " "))))) + ".")
     elif "python 3" in userInput:
         talk("Do not talk about that useless language to me!")
     elif "im " in userInput:
@@ -88,9 +89,21 @@ while True:
         talk("Hi, " + userInput[3:] + "! I'm SAAI!")
     elif "whats the time" in userInput or "what is the time" in userInput:
         talk("Time to get a watch" + stuff + ".")
+    elif "developer1:502" in userInput:
+        if botlearn == 0:
+            botlearn = 1
+            print "botlearn = 1"
+        elif botlearn == 1:
+            botlearn = 0
+            print "botlearn = 0"
+    elif "developerinfo:502" in userInput:
+            print "botlearn = " + str(botlearn)
+            
+        
     else:
         botoutput = bot.get_response(userInput)
-        bot.train("chatterbot.corpus.english.conversations")
+        if botlearn == 1:
+            bot.train("chatterbot.corpus.english.conversations")
         engine.say(botoutput)
         engine.runAndWait()
 
