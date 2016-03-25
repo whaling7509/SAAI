@@ -1,44 +1,48 @@
-#Import Modules
+# Import Modules
 import pyttsx
 from random import randint
 import datetime
 from chatterbot import ChatBot
 import yweather
 import string
-import multiprocessing
 import speech_recognition as sr
+import threading
 
-#Variables and commands
+# Variables and commands
 engine = pyttsx.init()
 client = yweather.Client()
 stuff = ""
 botlearn = 1
-srcheck = 0
 
 bot = ChatBot("No Output",
-    storage_adapter="chatterbot.adapters.storage.JsonDatabaseAdapter",
-    logic_adapter="chatterbot.adapters.logic.ClosestMatchAdapter",
-    io_adapter="chatterbot.adapters.io.NoOutputAdapter",
-    database="./database.db")
+              storage_adapter="chatterbot.adapters.storage.JsonDatabaseAdapter",
+              logic_adapter="chatterbot.adapters.logic.ClosestMatchAdapter",
+              io_adapter="chatterbot.adapters.io.NoOutputAdapter",
+              database="./database.db")
 
 bot = ChatBot("SAAI")
 
-#age since launch
+# age since launch
 now = datetime.datetime.now()
 birthdate = datetime.datetime(2016, 01, 26, 11, 37, 00)
 age = str(now - birthdate)
-agelist = [str(str(age[::-1])[16:])[::-1], str(str(age[::-1])[13:15])[::-1], str(str(age[::-1])[10:12])[::-1], str(str(age[::-1])[7:9])[::-1], str(str(age[::-1])[:6])[::-1]]
-age = str(agelist[0] + " " + agelist[1] + " hours, " + agelist[2] + " minutes, " + agelist[3] + " seconds, " + agelist[4] + " microseconds ")
+agelist = [str(str(age[::-1])[16:])[::-1], str(str(age[::-1])[13:15])[::-1], str(str(age[::-1])[10:12])[::-1],
+           str(str(age[::-1])[7:9])[::-1], str(str(age[::-1])[:6])[::-1]]
+age = str(agelist[0] + " " + agelist[1] + " hours, " + agelist[2] + " minutes, " + agelist[3] + " seconds, " + agelist[
+    4] + " microseconds ")
 
-#maths notation
+# maths notation
 mathsnotation = ["+", "-", "*", "/", "^", "%"]
+
 
 class choice:
     def __init__(self, data):
         self.data = data
+
     def call(self):
         random = randint(1, len(data))
         return data[random - 1]
+
 
 def checkthing(a):
     for i in mathsnotation:
@@ -46,22 +50,22 @@ def checkthing(a):
             return True
     return False
 
+
 def talk(string):
     print(string)
     engine.say(string)
 
-class mainloop():
+
+def mainloop():
     global botlearn, srcheck, userInput
     print ""
-    if srcheck == 1:
-        print ">>>" + " " + userInput
-        print ""
-    elif srcheck == 0:
-        userInput = raw_input(">>> ").lower()
-        userInput = ''.join([c for c in userInput if c not in ('!', '?', '.', ',')])
-        print ""
+    userInput = raw_input(">>> ").lower()
+    userInput = ''.join([c for c in userInput if c not in ('!', '?', '.', ',')])
+    print ""
+    ifwhat()
 
-    srcheck = 0
+def ifwhat():
+    global botlearn
     if "buggy" in userInput or "bug" in userInput:
         talk("Please visit my GITHUB page to report bugs or request features. "
              "You will find my page at: github.com/Cyber-Shadow/SAAI")
@@ -89,7 +93,8 @@ class mainloop():
         talk("I am " + str(age) + "old, since you launched me")
         engine.runAndWait()
     elif checkthing(userInput):
-        print("The answer is" + str((eval((userInput.translate(None, string.ascii_letters).translate(None, " "))))) + ".")
+        print(
+        "The answer is" + str((eval((userInput.translate(None, string.ascii_letters).translate(None, " "))))) + ".")
     elif "python 3" in userInput:
         talk("Do not talk about that useless language to me!")
     elif "im " in userInput:
@@ -105,7 +110,7 @@ class mainloop():
             botlearn = 0
             print "botlearn = 0"
     elif "developerinfo:502" in userInput:
-            print "botlearn = " + str(botlearn)
+        print "botlearn = " + str(botlearn)
     else:
         botoutput = bot.get_response(userInput)
         if botlearn == 1:
@@ -113,30 +118,35 @@ class mainloop():
         engine.say(botoutput)
         engine.runAndWait()
 
+
 r = sr.Recognizer()
 m = sr.Microphone()
 
-class voicerec():
+
+def voicerec():
     global srcheck, userInput
     try:
-        with m as source: r.adjust_for_ambient_noise(source)
-        with m as source: audio = r.listen(source)
+        with m as source:
+            r.adjust_for_ambient_noise(source)
+        with m as source:
+            audio = r.listen(source)
         try:
             value = r.recognize_google(audio)
             if str is bytes:
                 userInput = (value)
-                print userInput
-                srcheck = 1
-                mainloop()
-
+                print ""
+                print ">>> " + userInput
+                ifwhat()
         except sr.UnknownValueError:
+            print ""
             print("Oops! Didn't catch that")
         except sr.RequestError as e:
             print("Uh oh! Couldn't request results from Google Speech Recognition service; {0}".format(e))
     except KeyboardInterrupt:
-      pass
+        pass
 
-thread1 = multiprocessing.Process(name='thread1', target=mainloop)
-thread2 = multiprocessing.Process(name='thread2', target=voicerec)
-thread1.start()
-thread2.start()
+
+thread = threading.Thread(target=mainloop)
+thread.start()
+otherThread = threading.Thread(target=voicerec)
+otherThread.start()
